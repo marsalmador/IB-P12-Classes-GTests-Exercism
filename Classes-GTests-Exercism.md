@@ -424,14 +424,27 @@ Incorpore en la clase los miembros de datos y métodos que considere adecuados p
 persigue en este ejercicio.
 Incluya un método que permita determinar si el año correspondiente a una fecha es un año bisiesto o
 no.
-Realice un programa cliente `fechas.cc` que tome como parámetro una fecha, un número y un nombre de fichero:
+Realice un programa cliente `fechas.cc` que tome como parámetros dos nombres de ficheros correspondientes a
+sendos ficheros de texto:
+
 ```
 ./fechas - Gestión de fechas
-Modo de uso: ./fechas dd/mm/aa N fichero_salida.txt
+Modo de uso: ./fechas fichero_entrada.txt fichero_salida.txt
 Pruebe ./fechas --help para más información
 ```
-El programa deberá imprimir en el fichero de salida (tercer parámetro) las N (segundo parámetro) fechas cronológicamente posteriores a la
-introducida (primer parámetro) con una separación de un día entre fechas sucesivas.
+El fichero de entrada contendrá múltiples líneas en cada una de las cuales habrá una fecha escrita en el formato:
+```
+dd/mm/aa
+```
+El programa deberá imprimir en el fichero de salida (segundo parámetro) todas las fechas que se encuentran en
+el fichero de entrada pero escritas en orden ascendente cronológicamente.
+Un modo de proceder es leer todas las fechas del fichero de entrada y almacenarlas en un vector, que será
+posteriormente ordenado para luego volcar su contenido en el fichero de salida.
+Para proceder de este modo ha de sobrecargar el operador que permite determinar el "orden" (cronológico) de
+dos fechas.
+
+Desarrolle un conjunto de tests (gtest) que incluya al menos dos tests para cada una de las funciones que incluya en
+su programa.
 
 2. La clase Complejo.
 
@@ -474,72 +487,8 @@ que imprimirían en pantalla los resultados de la suma y referencia de números 
 Incluya (discrecionalmente) cualesquiera otras operaciones que considere adecuadas como métodos en la clase
 `Complejo`.
 
-3. La clase Racional.
-
-Un 
-[número racional](https://en.wikipedia.org/wiki/Rational_number)
-tiene un numerador y un denominador de la forma `p/q` donde `p` es el numerador y `q` el denominador.
-Por ejemplo, 1/3, 3/4 y 10/4 son números racionales.
-
-Un número racional no puede tener denominador 0, pero sí puede ser cero el numerador.
-Todo número entero `n` es equivalente al racional `n/1`.
-Los números racionales se utilizan en cálculos precisos que involucran fracciones.
-Por ejemplo, `1/3 = 0.33333 ...`.
-Este número no puede ser representado de forma precisa en formato de punto flotante utilizando los tipos float o double.
-Para obtener resultados precisos es conveniente usar números racionales.
-
-C++ dispone de tipos de datos para enteros y números en punto flotante, pero no para racionales.
-En este ejercicio se propone el diseño de una clase para representar números racionales.
-
-Desarrolle un programa cliente `racionales.cc` que permita operar con números racionales y haga uso
-de la clase `Racional` que ha de diseñarse.
-
-Las siguientes deben tomarse como especificaciones del programa a desarrollar:
-* Separe el diseño de su clase `Racional` en dos ficheros, `racional.h` y `racional.cc` conteniendo
-  respectivamente la declaración y la definición de la clase.
-* La clase `Racional` incluirá al menos métodos para:
-    * Crear objetos de tipo `Racional`. Se debe implementar un constructor por defecto y uno parametrizado.
-    * Escribir (a fichero o a pantalla) un objeto de tipo `Racional`.
-    * Leer (por teclado o desde fichero) un objeto de tipo `Racional`.
-    * Sumar dos objetos de tipo `Racional`.
-    * Restar dos objetos de tipo `Racional`.
-    * Multiplicar dos objetos de tipo `Racional`.
-    * Dividir dos objetos de tipo `Racional`.
-    * Comparar objetos de tipo `Racional`.
-* El programa ha de permitir leer un fichero de texto en el que figuran pares de números racionales
-separados por espacios de la forma:
-
-```
-a/b c/d
-e/f g/h
-  ...
-```
-
-y para cada par de números racionales, el programa ha de imprimir en otro fichero de salida todas las operaciones posibles
-con cada uno de los pares de números del fichero de entrada, de la forma:
-
-```
-a/b + c/d = n/m
-  ...
-```
-
-Si el programa se ejecuta sin pasar parámetros en la línea de comandos, debemos obtener el siguiente mensaje:
-
-```
-./racionales -- Números Racionales
-Modo de uso: ./racionales fichero_entrada fichero_salida
-Pruebe ./racionales --help para más información
-```
-
-Si el programa se ejecuta pasando como parámetro la opción `--help` se ha de obtener:
-
-```
-./racionales -- Números Racionales
-Modo de uso: ./racionales fichero_entrada fichero_salida 
-
-fichero_entrada: Fichero de texto conteniendo líneas con un par de números racionales: `a/b c/d` separados por un espacio
-fichero_salida:  Fichero de texto que contendrá líneas con las operaciones realizadas: `a/b + c/d = n/m`
-```
+Desarrolle un conjunto de tests (gtest) que incluya al menos dos tests para cada una de las funciones que incluya en
+su programa.
 
 ### Referencias
 * [Desarrollo dirigido por Tests](https://es.wikipedia.org/wiki/Desarrollo_guiado_por_pruebas)
@@ -554,9 +503,6 @@ fichero_salida:  Fichero de texto que contendrá líneas con las operaciones rea
 * [¿Qué es Ubuntu `snap`?](https://blogubuntu.com/que-es-ubuntu-snap) 
 * [snap quickstart guide](https://snapcraft.io/docs/getting-started)
 * [Números complejos](https://es.wikipedia.org/wiki/N%C3%BAmero_complejo)
-* [Rational Number](https://en.wikipedia.org/wiki/Rational_number)
 *	[Class code and header files](https://www.learncpp.com/cpp-tutorial/89-class-code-and-header-files/)
 * [Header guards](https://www.learncpp.com/cpp-tutorial/header-guards/)
-* [Doxygen](https://en.wikipedia.org/wiki/Doxygen)
-* [Documenting C++ Code](https://developer.lsst.io/cpp/api-docs.html)
 * [Google C++ Style Guide](https://google.github.io/styleguide/cppguide.html)
