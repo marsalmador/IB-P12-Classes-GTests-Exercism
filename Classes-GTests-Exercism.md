@@ -40,8 +40,8 @@ que se tendrán en cuenta a la hora de evaluar esta práctica:
 ### La plataforma de testing de Google
 Tal como recoge la
 [Wikipedia](https://es.wikipedia.org/wiki/Desarrollo_guiado_por_pruebas),
-El desarrollo dirigido por tests (TDD, *Test Driven Development* en sus siglas en inglés) es una práctica de 
-ingeniería de software que involucra otras dos prácticas: 
+El desarrollo dirigido por tests (TDD, *Test Driven Development* por sus siglas en inglés) es una práctica de 
+ingeniería de software que involucra otras dos técnicas: 
 escribir las pruebas primero (Test First Development) y 
 [Refactorización](https://es.wikipedia.org/wiki/Refactorizaci%C3%B3n)
 (Refactoring) o reestructuración del código.
