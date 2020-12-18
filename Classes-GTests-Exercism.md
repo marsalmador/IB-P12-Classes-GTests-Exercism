@@ -53,6 +53,8 @@ involucra la repetición de tres pasos:
 2. A continuación se desarrolla el código (de la función) que hace que la prueba pase satisfactoriamente 
 3. Finalmente refactoriza el nuevo código hasta obtener un resultado satisfactorio
 
+Esta imagen representa este ciclo repetitivo característico del TDD.
+
 ![TDD cycle](https://raw.githubusercontent.com/ULL-ESIT-IB-2020-2021/IB-P12-Classes-GTests-Exercism/master/red-green-refactor.png "Red-Green-Refactor")
 
 El propósito del desarrollo guiado por pruebas es lograr un código limpio que funcione correctamente.
@@ -60,7 +62,7 @@ La idea es que los requisitos sean traducidos a pruebas (tests), y de este modo,
 se garantizará que el software cumple con los requisitos que se han establecido.
 
 
-Las "unidades de código" para las que se realizan tests habitualmente se refieren a clases, funciones o grupos ellas. 
+Las "unidades" de código para las que se realizan tests habitualmente son clases, funciones o grupos ellas. 
 Supongamos por ejemplo que se está implementando una función (unidad de código) que calcula la suma de dos números enteros.
 Una prueba (test unitario) es un código que valida la corrección de esa función: se podría comprobar que lo
 que reciba la función sean realmente dos parámetros, y que esos dos parámetros sean números, y que lo que
@@ -68,28 +70,33 @@ devuelva la función sea otro número, y que ese número corresponda realmente c
 Todas estas podrían ser posibles pruebas unitarias que se realicen sobre la función.
 Las pruebas unitarias  se suelen realizar utilizando entornos de pruebas (testing) especializados.
 
-Existen 
-[diversas plataformas](https://en.wikipedia.org/wiki/List_of_unit_testing_frameworks#C++)
-para el desarrollo de tests unitarios en C++.
+Existen diversas plataformas para el desarrollo de tests unitarios en C++.
+Algunas de las de uso más extendido son
+[Boost.Test](https://www.boost.org/doc/libs/1_49_0/libs/test/doc/html/index.html),
+[CppUnit](https://sourceforge.net/projects/cppunit/),
+[Cute](https://cute-test.com/)
+aunque hay
+[muchas otras](https://en.wikipedia.org/wiki/List_of_unit_testing_frameworks#C++)
+
 En esta práctica se propone utilizar el framework 
 [Google Test](https://en.wikipedia.org/wiki/Google_Test),
 (también conocido como gtest) que es una librería de pruebas unitarias (*unit tests*) para C++.
-El entorno permite que las pruebas (*tests*) se ejecuten de una en una o todas a la vez. 
+El entorno permite que los tests se ejecuten de una en uno o todos a la vez. 
 Google Tests puede ser utilizado en 
 [Visual Studio Code](https://docs.microsoft.com/es-es/visualstudio/test/how-to-use-google-test-for-cpp?view=vs-2019), 
-aunque en esta práctica se propone un uso de la plataforma de modo independiente de VSC.
+aunque en este documento se propone un uso de la plataforma de modo independiente de VSC.
 
 El primer paso para usar gtest es su instalación. 
 Siga para ello los siguientes pasos:
 
 ```
- 1 $ git clone https://github.com/google/googletest.git -b release-1.10.0
- 2 $ cd googletest/
- 3 $ mkdir build
- 4 $ cd build/
- 5 $ cmake .. -DBUILD_GMOCK=OFF
- 6 $ make
- 7 $ sudo make install
+$ git clone https://github.com/google/googletest.git -b release-1.10.0
+$ cd googletest/
+$ mkdir build
+$ cd build/
+$ cmake .. -DBUILD_GMOCK=OFF
+$ make
+$ sudo make install
 ```
 que se explican en el documento 
 [Standalone CMake Project](https://github.com/google/googletest/blob/master/googletest/README.md#standalone-cmake-project).
@@ -100,6 +107,7 @@ instalará gtest en el directorio `/usr/local/` del sistema , de modo que en los
 /usr/local/lib
 ```
 se alojan los ficheros de cabecera (`*.h`) y las librerías (`*.a`) necesarios para usar gtest.
+Una vez instalada la librería puede eliminar el directorio `googletest` en el que copió el repositorio.
 
 El repositorio de esta práctica contiene un directorio `gtests` con el siguiente contenido:
 ```
@@ -134,7 +142,7 @@ A modo de ejemplo, el programa principal del proyecto `main_program.cc` (véase 
 invoca a diferentes funciones de carácter matemático que han sido
 desarrolladas por el usuario (ficheros `src/*.cc` y `src/*.h`).
 
-Compile el proyecto cuya configuración viene dada por el fichero `CMakeLists.txt` ejecutando en el directorio
+Compile el proyecto cuya configuración viene especificada en el fichero `CMakeLists.txt` ejecutando en el directorio
 `gtests`:
 ```
 $ mkdir build
@@ -142,7 +150,7 @@ $ cd build
 $ cmake ..
 $ make
 ```
-Estos comandos crearán en el directorio `build` sendos programas ejecutables: `user_program` y `runTests`.
+Esta secuencia de comandos creará en el subdirectorio `build` sendos programas ejecutables: `user_program` y `runTests`.
 El primero de ellos corresponde con el programa principal del usuario.
 Pruebe a ejecutarlo y revise el código de las diferentes funciones que utiliza ese programa.
 
@@ -171,7 +179,6 @@ que utiliza el programa `main_program.cc`.
 Todos los ficheros del directorio `tests` contienen la línea
 ```
 include <gtest/gtest.h>
-
 ```
 
 de inclusión del fichero de cabecera donde se definen las macros y funciones de la librería de testing de
@@ -182,10 +189,11 @@ TEST(TestSuiteName, TestName) {
   ... test body ...
 }
 ```
+El primer parámetro de la macro TEST (`TestSuiteName`) es el nombre que se le da a un conjunto de tests
+relacionados mientras que el segundo parámetro es el nombre que se le ha dado al test.
 
-
-
-Estudie la documentación del 
+Estudie los tests que figuran en el directorio `gtests/test` para las diferentes funciones del ejemplo,
+conjuntamente con la documentación del 
 [Googletest Primer](https://github.com/google/googletest/blob/master/googletest/docs/primer.md)
 para aprender sobre los diferentes tipos de 
 [aserciones](https://es.wikipedia.org/wiki/Aserci%C3%B3n_(inform%C3%A1tica))
@@ -193,16 +201,19 @@ y comparaciones que soporta la plataforma para realizar sus tests.
 
 En todos los programas C++ que desarrolle de ahora en adelante, utilice siempre gtests para comprobar la
 corrección de todas sus funciones y métodos.
-Este enfoque (TDD) le ayudará a hallar los bugs de forma temprana de modo que podrá solucionarlos de forma
-menos costosa en tiempo y esfuerzo.
-La técnica de *testing* es fundamental para "cazar" cuanto antes los errores potenciales.
+El enfoque (TDD) le ayudará a hallar los bugs de forma temprana de modo que podrá solucionarlos con un menor
+coste en tiempo y esfuerzo.
+La técnica de *testing* es fundamental para detectar cuanto antes potenciales errores.
 Las funciones que han sido comprobadas mediante tests unitarios son siempre más fiables.
-Para cada función que escriba de ahora en adelante, escriba al menos dos tests: uno para las situaciones "normales" y otro para situaciones "extremas".
+Para cada función que escriba de ahora en adelante, comience siempre por escribir antes que el código de la
+función, al menos dos tests: uno para las situaciones "normales" y otro para situaciones "extremas".
+
 La regla a seguir de ahora en adelante es **Convierta en un hábito la escritura de tests para sus programas**.
 Desarrolle siempre sus funciones iterando el famoso ciclo TDD que ya se ha expuesto en este documento:
 * Escriba un test que falle y que define una mejora deseada o una nueva función
 * Escirba el código (función, método) que haga que la prueba pase satisfactoriamente 
 * Finalmente refactoriza el nuevo código hasta obtener un resultado satisfactorio
+
 Es fácil encontrar en la web mucha documentación sobre TDD. 
 A modo de ejemplo e introducción se recomienda el estudio de
 [Mejorar la calidad del código mediante la prueba unitaria](https://www.mql5.com/es/articles/1579).
@@ -218,34 +229,34 @@ Además, la interacción con el resto de la comunidad podrá llevar a debates pa
 La plataforma se basa en una una aplicación de línea de comandos disponible para diferentes sistemas
 operativos (Linux, Mac, Windows).
 Usando esa aplicación, un usuario puede descargar una serie de ejercicios de programación disponibles en la
-plataforma y realiza los correspondientes programas hasta que consigue aprobar los diferentes tests que se le
-pasan a cada ejercicio.
+plataforma y realizar los correspondientes programas hasta que consiga pasar los diferentes tests que se
+suministran con cada ejercicio.
 
 La plataforma puede ser usada en "modo práctica", en cuyo caso no existe la opción de mentorización (solicitar
 que una experta le ayude con sus ejercicios), pero aún
 así merece la pena practicar los múltiples ejercicios que hallará en la plataforma.
 
-### Primeros pasos en Exercism
+## Primeros pasos en Exercism
 Comience por [registrarse en Exercism](https://exercism.io/users/sign_up). 
 Si lo desea, puede Ud. hacerlo usando la cuenta de GitHub de la que ya dispone.
 Una vez disponga de una cuenta, configure lo básico de la misma y elija un "track" (un lenguaje) en el que
 desee practicar.
-Obviamente se le propone que elija el track correspondiente a C++.
+Obviamente se propone que elija el track correspondiente a C++.
 
 Propóngase a continuación resolver el problema "Hello World".
 En la página de ese problema (o de cualquier otro) hallará Ud. un enlace que indica *Get started* y 
 [Begin walk-through](https://exercism.io/cli-walkthrough).
-Si sigue ese enlace le llevará a una pantalla *Welcome to the Exercism installation guide!* con instrucciones
+Si sigue ese enlace le llevará a la página *Welcome to the Exercism installation guide!* con instrucciones
 sobre cómo instalar `exercism`.
 En este documento se propone instalarla en la máquina virtual Linux de la asignatura.
 Eligiendo la opción *Linux* y a continuación la opción *Using snap* se le pedirá que ejecute
 ```
-sudo snap install exercism
+$ sudo snap install exercism
 ```
 Ese comando instalará en primer lugar `snap` y a continuación `exercism`, que es lo que se persigue.
 También en esa página se indica que se compruebe que la instalación es correcta con el comando
 ```
-exercism version
+$ exercism version
 ```
 [`snap`](https://blogubuntu.com/que-es-ubuntu-snap) es un mecanismo alternativo al ya conocido
 `apt-get install` para instalar aplicaciones en Ubuntu Linux.
@@ -257,7 +268,7 @@ Una vez instalada la aplicación `exercism` el siguiente paso es configurar la i
 aplicación.
 Para ello se pide que se ejecute el comando
 ```
-exercism configure --token=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+$ exercism configure --token=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
 ```
 donde el *token* que figura en el comando anterior se encuentra (es específico de cada usuario) en la [página
 de configuración](https://exercism.io/my/settings) de la cuenta de usuario que se ha creado.
@@ -294,7 +305,7 @@ Si revisa Ud. los ficheros descargados observará que Exercism utiliza `.cpp` co
 con código fuente C++ en lugar de la extensión `.cc` que recomienda la Guía de Estilo de Google.
 La extensión `.cpp` es muy común para ficheros de código C++.
 
-### Ejecución de los tests para un determinado problema
+## Ejecución de los tests para un determinado problema
 El siguiente paso consiste en editar el programa (en el caso del problema "Hello World" el fichero a editar es
 `hello_world.cpp`).
 Edite ese fichero hasta que considere que tiene una versión operativa.
@@ -303,7 +314,7 @@ Cada ejercicio de Exercism va acompañado de una serie de tests que el programa 
 considerado válido.
 
 Tal como se explica en la página [Running the Tests](https://exercism.io/tracks/cpp/tests), cada problema va
-acompañado de sus tests unitarios (así se llama este tipo de tests) y un fichero `CMakeLists.txt` que se
+acompañado de sus tests unitarios y un fichero `CMakeLists.txt` que se
 utiliza para automatizar la compilación de los tests y del propio programa.
 Tenga en cuenta que **no** debiera editar ni modificar el fichero `CMakeLists.txt`.
 
@@ -313,7 +324,7 @@ ejecutar los tests.
 Esos ficheros podrían estar vacíos, pero han de existir.
 En el caso del ejercicio `hello-world` los ficheros son `hello-world.cpp` y `hello-world.h`
 
-El siguiente paso (suponiendo un entorno Linux) es compilar el programa y los tests unitarios.
+El siguiente paso es compilar el programa y los tests unitarios.
 Para ello, colóquese en el directorio del ejercicio (`/home/usuario/snap/exercism/5/exercism/cpp/hello-world`)
 y ejecute:
 ```
@@ -328,17 +339,11 @@ como argumentos.
 El directorio `build` que se crea servirá para alojar (entre otros ficheros) un programa ejecutable que pasará
 los tests a su código.
 Exercism utiliza `cmake` (tendrá Ud. que instalar esa aplicación en su VM si no la tiene instalada).
-[CMake](https://cmake.org/) es una herramienta (similar a `make` en cuanto a su finalidad, pero más
-sofisticada) que facilita construir, probar y empaquetar software. 
-De forma análoga a `make`, `CMake` también se utiliza para controlar el proceso de compilación de la
-aplicación.
 
-Para usar Exercism no es necesario que conozca Ud. los detalles de `CMake`.
-El fichero `CMakeLists.txt` que acompaña a cada problema es un fichero de configuración para `CMake`.
 Al ejecutar `cmake -G "Unix Makefiles" ..` CMake creará un fichero Makefile que le servirá para compilar su
 ejercicio.
 Al ejecutar `make` en el directorio `build` se compilan los tests que ha de pasar su programa.
-Si se producen errores de compilación, tendrá Ud. que solucionarlos en el directorio (padre de `build` de su
+Si se producen errores de compilación, tendrá Ud. que solucionarlos en el directorio (padre de `build`) de su
 ejercicio.
 Una vez que se corrijan los errores, `make` construirá y ejecutará los tests que haya disponibles para el
 ejercicio en cuestión.
@@ -353,9 +358,10 @@ Para ello basta que "mueva" en el código la línea
 #if defined(EXERCISM_RUN_ALL_TESTS)
 ```
 para situarla después del siguiente test que quiera probar.
-
-Exercism puede ser usado en "modo práctica", en cuyo caso no existe la opción de mentorización, pero aún
-así merece la pena practicar los múltiples ejercicios que hallará en la plataforma.
+Tenga en cuenta que la plataforma de testing que utiliza Exercism es 
+[Catch2](https://github.com/catchorg/Catch2)
+y no Google Tests, pero los tests en formato Catch2 son fáciles de entender si se conoce
+cualquier otra plataforma de testing.
 
 Cuando su solución al problema pase todos los tests y esté Ud. satisfecha con la misma, puede remitirla a la
 plataforma.
@@ -369,7 +375,6 @@ https://exercism.io/my/solutions/xxxx
 ```
 A partir de este punto puede ya ver las soluciones que otras usuarias hayan dado al mismo problema o bien
 avanzar con otros problemas de ese mismo "track".
-
 
 ### Trabajo previo
 Antes de realizar los ejercicios de esta práctica, estudie detenidamente el Capítulo 8 (epígrafes 8.1-8.16) del
