@@ -1,6 +1,6 @@
 #ifndef CUBIC_H
 
-double cubic(double d);
+double Cubic(double d);
 
 #define CUBIC_H
 #endif

@@ -3,7 +3,7 @@
 
 class Addition {
 public:
-  static int twoValues(const int x, const int y);  
+  static int TwoValues(const int x, const int y);  
 };
 
 #endif

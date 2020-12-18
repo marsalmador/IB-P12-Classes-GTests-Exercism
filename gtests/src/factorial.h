@@ -1,6 +1,6 @@
 #ifndef FACTORIAL_H
 #define FACTORIAL_H
 
-int factorial(int n);
+int Factorial(int n);
 
 #endif 

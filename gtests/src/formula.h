@@ -3,7 +3,7 @@
 
 class Formula {
  public:
-  static int bla(int arg1);
+  static int Bla(int arg1);
 };
 
 #endif 
