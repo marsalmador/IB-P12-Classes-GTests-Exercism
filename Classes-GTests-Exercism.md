@@ -34,41 +34,44 @@ que se tendrán en cuenta a la hora de evaluar esta práctica:
   [Doxygen](https://www.doxygen.nl/index.html).
 * Los programas deben estructurarse en directorios diferentes para cada "proyecto" y hacer que cada uno de
   ellos contenga un fichero `CMakeLists.txt` con la configuración de despliegue del proyecto.
+* Las funciones y métodos que se desarrollen para resolver los ejercicios han de disponer de un conjunto
+  mínimo de tests unitarios que comprueben la corrección de cada una de ellas.
 
 ### La plataforma de testing de Google
 Tal como recoge la
 [Wikipedia](https://es.wikipedia.org/wiki/Desarrollo_guiado_por_pruebas),
 El desarrollo dirigido por tests (TDD, *Test Driven Development* en sus siglas en inglés) es una práctica de 
 ingeniería de software que involucra otras dos prácticas: 
-Escribir las pruebas primero (Test First Development) y 
+escribir las pruebas primero (Test First Development) y 
 [Refactorización](https://es.wikipedia.org/wiki/Refactorizaci%C3%B3n)
 (Refactoring) o reestructuración del código.
 Para escribir las pruebas generalmente se utilizan las pruebas unitarias (unit test en inglés). 
 
-El desarrollo dirigido por pruebas (TDD) se basa en la repetición de un ciclo de desarrollo muy corto que
+El TDD se basa en la repetición de un ciclo de desarrollo muy corto que
 involucra la repetición de tres pasos:
-* En primer lugar el desarrollador escribe un caso de prueba (test) que falla y que define una mejora deseada o una nueva función
-* A continuación se desarrolla el código que hace que la prueba pase satisfactoriamente 
-* Finalmente refactoriza el nuevo código hasta obtener un resultado satisfactorio
+1. En primer lugar el desarrollador escribe un caso de prueba (test) que falla (a propósito) y que define una mejora deseada (habitualmente una nueva función o método)
+2. A continuación se desarrolla el código (de la función) que hace que la prueba pase satisfactoriamente 
+3. Finalmente refactoriza el nuevo código hasta obtener un resultado satisfactorio
+
 El propósito del desarrollo guiado por pruebas es lograr un código limpio que funcione correctamente.
 La idea es que los requisitos sean traducidos a pruebas (tests), y de este modo, cuando las pruebas pasen 
 se garantizará que el software cumple con los requisitos que se han establecido.
 
 
 Las "unidades de código" para las que se realizan tests habitualmente se refieren a clases, funciones o grupos ellas. 
-Las pruebas unitarias  se suelen realizar utilizando entornos de pruebas (testing) especializados.
-Supongamos por ejemplo que se está implementando una función que calcula la suma de dos números enteros.
+Supongamos por ejemplo que se está implementando una función (unidad de código) que calcula la suma de dos números enteros.
 Una prueba (test unitario) es un código que valida la corrección de esa función: se podría comprobar que lo
 que reciba la función sean realmente dos parámetros, y que esos dos parámetros sean números, y que lo que
 devuelva la función sea otro número, y que ese número corresponda realmente con la suma. 
 Todas estas podrían ser posibles pruebas unitarias que se realicen sobre la función.
+Las pruebas unitarias  se suelen realizar utilizando entornos de pruebas (testing) especializados.
 
 Existen 
 [diversas plataformas](https://en.wikipedia.org/wiki/List_of_unit_testing_frameworks#C++)
 para el desarrollo de tests unitarios en C++.
 En esta práctica se propone utilizar el framework 
 [Google Test](https://en.wikipedia.org/wiki/Google_Test),
-(también conocido como gtest) es una librería de pruebas unitarias (*unit tests*) para C++.
+(también conocido como gtest) que es una librería de pruebas unitarias (*unit tests*) para C++.
 El entorno permite que las pruebas (*tests*) se ejecuten de una en una o todas a la vez. 
 Google Tests puede ser utilizado en 
 [Visual Studio Code](https://docs.microsoft.com/es-es/visualstudio/test/how-to-use-google-test-for-cpp?view=vs-2019), 
@@ -88,7 +91,8 @@ Siga para ello los siguientes pasos:
 ```
 que se explican en el documento 
 [Standalone CMake Project](https://github.com/google/googletest/blob/master/googletest/README.md#standalone-cmake-project).
-El comando `sudo make install` instalará gtest en el directorio `/usr/local/`, de modo que en los directorios
+El comando `sudo make install` (obsérvese que se ejecuta con privilegios de *root*) 
+instalará gtest en el directorio `/usr/local/` del sistema , de modo que en los directorios
 ```
 /usr/local/include
 /usr/local/lib
@@ -122,8 +126,10 @@ gtests
        ├── test_multiply.cc
        └── test_square_root.cc
 ```
-Siguiendo la costumbre habitual, el subdirectorio `src` contiene el código fuente del proyecto.
-A modo de ejemplo, el programa principal `main_program.cc` invoca a diferentes funciones de carácter matemático que han sido
+Siguiendo la costumbre habitual, el subdirectorio `src` contiene el código fuente del proyecto, que en este
+caso es un proyecto ficticio que se usa para ilustrar el uso de tests unitarios.
+A modo de ejemplo, el programa principal del proyecto `main_program.cc` (véase su código fuente)
+invoca a diferentes funciones de carácter matemático que han sido
 desarrolladas por el usuario (ficheros `src/*.cc` y `src/*.h`).
 
 Compile el proyecto cuya configuración viene dada por el fichero `CMakeLists.txt` ejecutando en el directorio
@@ -135,9 +141,10 @@ $ cmake ..
 $ make
 ```
 Estos comandos crearán en el directorio `build` sendos programas ejecutables: `user_program` y `runTests`.
-El primero de ellos corresponde con el programa del usuario.
+El primero de ellos corresponde con el programa principal del usuario.
 Pruebe a ejecutarlo y revise el código de las diferentes funciones que utiliza ese programa.
-El programa `runTests` ejecuta todos los tests unitarios que se han desarrollado para comprobar el correcto
+
+Por otra parte, el programa `runTests` ejecuta todos los tests unitarios que se han desarrollado para comprobar el correcto
 funcionamiento de las diferentes funciones que intervienen en el programa del usuario.
 Pruebe asimismo a ejecutarlo.
 Ambos programas se pueden compilar de forma independiente ejecutando en el diectorio `build`:
@@ -158,6 +165,23 @@ Lo que más interesa estudiar a continuación es el contenido del directorio `te
 En ese directorio, el programa `gtest_main.cc` invoca la ejecución de todos los tests mientras que los
 diferentes ficheros `test_*.cc` contienen los tests correspondientes a las diferentes funciones del usuario
 que utiliza el programa `main_program.cc`.
+
+Todos los ficheros del directorio `tests` contienen la línea
+```
+include <gtest/gtest.h>
+
+```
+
+de inclusión del fichero de cabecera donde se definen las macros y funciones de la librería de testing de
+Google que se enlaza (*link*) con el programa.
+Cada uno de esos ficheros contiene uno o más tests que tienen la siguiente estructura:
+```
+TEST(TestSuiteName, TestName) {
+  ... test body ...
+}
+```
+
+
 
 Estudie la documentación del 
 [Googletest Primer](https://github.com/google/googletest/blob/master/googletest/docs/primer.md)
