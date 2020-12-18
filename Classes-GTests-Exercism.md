@@ -154,11 +154,32 @@ Estudie el contenido del fichero `CMakeLists.txt` y observe en el mismo (comando
 y `add_executable(user_program)`) los ficheros que están involucrados en cada uno de los dos programas
 anteriores.
 
-Lo que más interesa estudiar a continuación es el contenido 
+Lo que más interesa estudiar a continuación es el contenido del directorio `tests`.
+En ese directorio, el programa `gtest_main.cc` invoca la ejecución de todos los tests mientras que los
+diferentes ficheros `test_*.cc` contienen los tests correspondientes a las diferentes funciones del usuario
+que utiliza el programa `main_program.cc`.
 
+Estudie la documentación del 
+[Googletest Primer](https://github.com/google/googletest/blob/master/googletest/docs/primer.md)
+para aprender sobre los diferentes tipos de 
+[aserciones](https://es.wikipedia.org/wiki/Aserci%C3%B3n_(inform%C3%A1tica))
+y comparaciones que soporta la plataforma para realizar sus tests.
 
-
-
+En todos los programas C++ que desarrolle de ahora en adelante, utilice siempre gtests para comprobar la
+corrección de todas sus funciones y métodos.
+Este enfoque (TDD) le ayudará a hallar los bugs de forma temprana de modo que podrá solucionarlos de forma
+menos costosa en tiempo y esfuerzo.
+La técnica de *testing* es fundamental para "cazar" cuanto antes los errores potenciales.
+Las funciones que han sido comprobadas mediante tests unitarios son siempre más fiables.
+Para cada función que escriba de ahora en adelante, escriba al menos dos tests: uno para las situaciones "normales" y otro para situaciones "extremas".
+La regla a seguir de ahora en adelante es **Convierta en un hábito la escritura de tests para sus programas**.
+Desarrolle siempre sus funciones iterando el famoso ciclo TDD que ya se ha expuesto en este documento:
+* Escriba un test que falle y que define una mejora deseada o una nueva función
+* Escirba el código (función, método) que haga que la prueba pase satisfactoriamente 
+* Finalmente refactoriza el nuevo código hasta obtener un resultado satisfactorio
+Es fácil encontrar en la web mucha documentación sobre TDD. 
+A modo de ejemplo e introducción se recomienda el estudio de
+[Mejorar la calidad del código mediante la prueba unitaria](https://www.mql5.com/es/articles/1579).
 
 ### Trabajo previo
 Antes de realizar los ejercicios de esta práctica, estudie detenidamente el Capítulo 8 (epígrafes 8.1-8.16) del
@@ -329,6 +350,8 @@ fichero_salida:  Fichero de texto que contendrá líneas con las operaciones rea
 * [Google Test](https://en.wikipedia.org/wiki/Google_Test)
 * [Cómo usar Google Test para C++ en VSC](https://docs.microsoft.com/es-es/visualstudio/test/how-to-use-google-test-for-cpp?view=vs-2019), 
 * [Google Tests build instructions](https://github.com/google/googletest/blob/master/googletest/README.md#standalone-cmake-project)
+* [Googletest Primer](https://github.com/google/googletest/blob/master/googletest/docs/primer.md)
+* [Mejorar la calidad del código mediante la prueba unitaria](https://www.mql5.com/es/articles/1579).
 
 
 * [Google Test + gcover. Una lista de recetas](https://usingstdcpp.files.wordpress.com/2016/11/gtest.pdf)
