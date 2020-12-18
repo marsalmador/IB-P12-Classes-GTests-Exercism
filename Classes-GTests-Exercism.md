@@ -53,6 +53,8 @@ involucra la repetición de tres pasos:
 2. A continuación se desarrolla el código (de la función) que hace que la prueba pase satisfactoriamente 
 3. Finalmente refactoriza el nuevo código hasta obtener un resultado satisfactorio
 
+![TDD cycle](https://raw.githubusercontent.com/ULL-ESIT-IB-2020-2021/IB-P12-Classes-GTests-Exercism/master/red-green-refactor.png "Red-Green-Refactor")
+
 El propósito del desarrollo guiado por pruebas es lograr un código limpio que funcione correctamente.
 La idea es que los requisitos sean traducidos a pruebas (tests), y de este modo, cuando las pruebas pasen 
 se garantizará que el software cumple con los requisitos que se han establecido.
