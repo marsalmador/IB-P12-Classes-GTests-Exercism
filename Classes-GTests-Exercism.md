@@ -466,11 +466,9 @@ Siga igualmente las indicaciones del tutorial
 para incluir (siempre de ahora en adelante) *header guards* (guardas de cabecera) en sus ficheros de
 definiciones (`*.h`) de modo que se evite la inclusión múltiple del mismo fichero.
 
-Desarrolle un programa cliente `complejos.cc` que permita operar con números complejos y haga uso
-de la clase `Complejo` que diseñe.
-La clase `Complejo` ha de contener al menos métodos que permitan (*print()*) imprimir un número 
-complejo así como sumar (*Add()*) y restar (*Sub()*) números complejos.
-Así la función *main* del programa `complejos.cc` podría contener sentencias como las siguientes:
+Desarrolle un programa cliente `complejos.cc` que permita operar con números complejos y haga uso de la clase `Complejo` que diseñe.
+La clase `Complejo` ha de contener al menos métodos que permitan (`Print()`) imprimir un número complejo así como sumar (`Add()`) y restar (`Sub()`) números complejos.
+Así la función `main` del programa `complejos.cc` podría contener sentencias como las siguientes:
 
 ```
 main() {
@@ -484,11 +482,9 @@ main() {
 ```
 que imprimirían en pantalla los resultados de la suma y referencia de números complejos indicada.
 
-Incluya (discrecionalmente) cualesquiera otras operaciones que considere adecuadas como métodos en la clase
-`Complejo`.
+Incluya (discrecionalmente) cualesquiera otras operaciones que considere adecuadas como métodos en la clase `Complejo`.
 
-Desarrolle un conjunto de tests (gtest) que incluya al menos dos tests para cada una de las funciones que incluya en
-su programa.
+Desarrolle un conjunto de tests (gtest) que incluya al menos dos tests para cada una de las funciones que incluya en su programa.
 
 ### Referencias
 * [Desarrollo dirigido por Tests](https://es.wikipedia.org/wiki/Desarrollo_guiado_por_pruebas)
