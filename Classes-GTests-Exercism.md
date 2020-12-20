@@ -417,7 +417,7 @@ desarrollando. Utilice el depurador de VSC para corregir cualquier tipo de error
 cualquiera de sus desarrollos.
 
 ### Ejercicios
-1. La clase Fecha.
+1. La clase `Fecha`.
 
 Desarrolle una clase `Fecha` que permita representar y gestionar fechas.
 Incorpore en la clase los miembros de datos y métodos que considere adecuados para la finalidad que se
@@ -446,7 +446,7 @@ dos fechas.
 Desarrolle un conjunto de tests (gtest) que incluya al menos dos tests para cada una de las funciones que incluya en
 su programa.
 
-2. La clase Complejo.
+2. La clase `Complejo`.
 
 Todo
 [número complejo](https://es.wikipedia.org/wiki/N%C3%BAmero_complejo)
