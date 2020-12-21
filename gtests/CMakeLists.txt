@@ -59,24 +59,28 @@ add_executable(runTests
     src/multiply.h
     src/multiply.cc
     test/test_multiply.cc
+    src/sample2.h
+    src/sample2.cc
+    test/sample2_unittest.cc
+    src/date.h
+    src/date.cc
+    test/test_date.cc
     src/square_root.h
     src/square_root.cc
-    test/test_square_root.cc
-    src/cubic.h
-    src/cubic.cc
-		test/test_cubic.cc)
+    test/test_square_root.cc)
 
 add_executable(user_program
     src/factorial.h
     src/factorial.cc
-    src/cubic.h
-    src/cubic.cc
     src/formula.h
     src/formula.cc
     src/addition.h
     src/addition.cc
     src/multiply.h
     src/multiply.cc
+    src/date.h
+    src/date.cc
+    src/sample2.cc
     src/square_root.h
     src/square_root.cc
 		src/main_program.cc)

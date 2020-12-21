@@ -112,29 +112,33 @@ Una vez instalada la librería puede eliminar el directorio `googletest` en el q
 El repositorio de esta práctica contiene un directorio `gtests` con el siguiente contenido:
 ```
 gtests
-   ├── CMakeLists.txt
-   ├── src
-   │   ├── addition.cc
-   │   ├── addition.h
-   │   ├── cubic.cc
-   │   ├── cubic.h
-   │   ├── factorial.cc
-   │   ├── factorial.h
-   │   ├── formula.cc
-   │   ├── formula.h
-   │   ├── main_program.cc
-   │   ├── multiply.cc
-   │   ├── multiply.h
-   │   ├── square_root.cc
-   │   └── square_root.h
-   └── test
-       ├── gtest_main.cc
-       ├── test_addition.cc
-       ├── test_cubic.cc
-       ├── test_factorial.cc
-       ├── test_formula.cc
-       ├── test_multiply.cc
-       └── test_square_root.cc
+  ├── CMakeLists.txt
+  ├── src
+  │   ├── addition.cc
+  │   ├── addition.h
+  │   ├── date.cc
+  │   ├── date_client_program.cc
+  │   ├── date.h
+  │   ├── factorial.cc
+  │   ├── factorial.h
+  │   ├── formula.cc
+  │   ├── formula.h
+  │   ├── main_program.cc
+  │   ├── multiply.cc
+  │   ├── multiply.h
+  │   ├── sample2.cc
+  │   ├── sample2.h
+  │   ├── square_root.cc
+  │   └── square_root.h
+  └── test
+      ├── gtest_main.cc
+      ├── sample2_unittest.cc
+      ├── test_addition.cc
+      ├── test_date.cc
+      ├── test_factorial.cc
+      ├── test_formula.cc
+      ├── test_multiply.cc
+      └── test_square_root.cc
 ```
 Siguiendo la costumbre habitual, el subdirectorio `src` contiene el código fuente del proyecto, que en este
 caso es un proyecto ficticio que se usa para ilustrar el uso de tests unitarios.
@@ -191,6 +195,14 @@ TEST(TestSuiteName, TestName) {
 ```
 El primer parámetro de la macro TEST (`TestSuiteName`) es el nombre que se le da a un conjunto de tests
 relacionados mientras que el segundo parámetro es el nombre que se le ha dado al test.
+
+El test del fichero `test_date` es un ejemplo que comprueba métodos de una clase definida por el
+usuario.
+En este caso el test comprueba un par de métodos de la clase `Date`.
+
+Los ficheros `test/sample2_unittest.cc` y  `src/sample2.*` están tomados de
+[Googletest Samples](https://github.com/google/googletest/blob/master/googletest/docs/samples.md) 
+donde se pueden hallar ejemplos adicionales de tests.
 
 Estudie los tests que figuran en el directorio `gtests/test` para las diferentes funciones del ejemplo,
 conjuntamente con la documentación del 
