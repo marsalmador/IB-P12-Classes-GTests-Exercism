@@ -1,3 +1,19 @@
+/**
+ * Universidad de La Laguna
+ * Escuela Superior de Ingeniería y Tecnología
+ * Grado en Ingeniería Informática
+ * Informática Básica
+ *
+ * @file encriptar.cc
+ * @author: Marlon Eduardo Salazar Amador
+ * @date: 12 ene 2021
+ * @brief description: Este programa lee 6 fechas escritas en formato dd/mm/aaaa en un archivo de texto dado
+ * por el usuario y las copia ordenadas cronologicamente en un nuevo archivo. Para ello, el usuario debe
+ * introducir una serie de datos en la forma dada por el comando "./fechas --help"
+ * @bug No hay bugs conocidos
+ * @see https://www.cs.cmu.edu/~410/doc/doxygen.html
+ */
+
 #include <iostream>
 #include <algorithm>
 #include <fstream>
