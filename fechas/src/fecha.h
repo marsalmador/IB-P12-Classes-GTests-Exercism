@@ -3,9 +3,15 @@
  * class definition: date class
  */
 class Fecha{
-  public: //Atributtes
+/**
+ * Attributes
+ */
+  public:
     int dia, mes, ano; 
-  public: //Methods
+/**
+ * Methods
+ */
+  public:
    /**
     * It checks if a date is a leap year
     *
