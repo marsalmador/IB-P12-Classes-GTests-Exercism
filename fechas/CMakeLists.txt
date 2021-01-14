@@ -45,7 +45,7 @@ add_executable(runTests
     test/test_fechas.cc
     src/fecha.h
     src/fecha.cc
-    test/test_fecha.cc
+    test/test_fecha.cc)
     
 add_executable(fechas
     src/fecha.h
