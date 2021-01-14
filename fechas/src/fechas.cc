@@ -4,13 +4,14 @@
  * Grado en Ingeniería Informática
  * Informática Básica
  *
- * @file encriptar.cc
+ * @file fechas.cc
  * @author: Marlon Eduardo Salazar Amador
  * @date: 12 ene 2021
- * @brief description: Este programa lee 6 fechas escritas en formato dd/mm/aaaa en un archivo de texto dado
- * por el usuario y las copia ordenadas cronologicamente en un nuevo archivo. Para ello, el usuario debe
- * introducir una serie de datos en la forma dada por el comando "./fechas --help"
- * @bug No hay bugs conocidos
+ * @brief description: This program reads 6 dates written in dd/mm/yyyy format into
+ * a text file given by the user and copies them chronologically into a new file.
+ * To do this, the user must enter a series of data in the form given by the
+ * "./dates --help" command
+ * @bug No known bugs
  * @see https://www.cs.cmu.edu/~410/doc/doxygen.html
  */
 
@@ -23,6 +24,9 @@
 #include "fecha.h"
 #include "fecha.cc"
 
+/**
+ * If the user only types "./dates" this small program guide will be displayed.
+ */
 int main(int argc, char* argv[]){
   if(argc==1){
     std::cout<<std::endl<<"./fechas - Gestion de fechas"<<std::endl;
@@ -31,7 +35,9 @@ int main(int argc, char* argv[]){
     std::cout<<"Pruebe ./fechas --help para mas informacion"<<std::endl;
     std::cout<<std::endl;
   }
-  
+/**
+ * If the user types "./dates --help " this guide will be displayed.
+ */
   if(argc > 1 && argc < 3 && (strcmp(argv[1], "--help") == 0)){
     std::cout<<std::endl<<"./fechas -- Gestion de fechas"<<std::endl;
     std::cout<<"Modo de uso: ./fechas fichero_entrada.txt ";
@@ -40,28 +46,41 @@ int main(int argc, char* argv[]){
     std::cout<<"fichero_salida.txt: FIchero ordenado"<<std::endl;
     std::cout<<std::endl;
   }
-
+/**
+ * If the user types "./dates" and two text files names,
+ it will start the main function of the program.
+ */
   if(argc == 3){
-
+   /**
+    * The two text files are opened and the lines of the first one are read.
+    */
     std::fstream in(argv[1]);
     std::ofstream out(argv[2]);
     std::string s;
     int i = 0;
     while(getline(in, s)){
+  /**
+    * The program gets the day, month and year of the dates by using "substr()"
+    * and puts them in the array of the class Fecha
+    */
     std::string dia_string = s.substr(0,2);
-    int dia_ = std::atoi(dia_string.c_str());
+    int dia_array = std::atoi(dia_string.c_str());
     std::string mes_string = s.substr(3,2);
-    int mes_ = std::atoi(mes_string.c_str());
+    int mes_array = std::atoi(mes_string.c_str());
     std::string ano_string = s.substr(6,4);
-    int ano_ = std::atoi(ano_string.c_str());
-    Fecha arr[6];
-    arr[i] = {dia_, mes_, ano_};
+    int ano_array = std::atoi(ano_string.c_str());
+    Fecha array_fechas[6];
+    array_fechas[i] = {dia_array, mes_array, ano_array};
     i++;
+   /**
+    * When the last iteration ends, the program sorts the dates and puts them
+    * in the second text file given
+    */
     if(i==6){
-      int n = sizeof(arr)/sizeof(arr[0]);
-      ordenarFechas(arr, n);
-      for(int j=0; j<n; j++){
-        out << arr[j].dia << " " << arr[j].mes << " " << arr[j].ano << " " << "\n";
+      int numero_elementos_array = sizeof(array_fechas)/sizeof(array_fechas[0]);
+      ordenarFechas(array_fechas, numero_elementos_array);
+      for(int j=0; j<numero_elementos_array; j++){
+        out << array_fechas[j].dia << " " << array_fechas[j].mes << " " << array_fechas[j].ano << " " << "\n";
       }
       return 0;
     }
