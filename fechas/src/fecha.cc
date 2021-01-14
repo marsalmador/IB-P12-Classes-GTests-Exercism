@@ -13,17 +13,17 @@ bool esBisiesto (const Fecha &fecha){
  //Un año es bisiesto si es múltiplo de 400 o, siendo
  //múltiplo de 4, no lo es de 100. En caso contrario
  //no es bisiesto
- return(fecha.a % 4 == 0 && fecha.a % 100 != 0)||(fecha.a % 400 == 0);
+ return(fecha.ano % 4 == 0 && fecha.ano % 100 != 0)||(fecha.ano % 400 == 0);
 }
 
 bool comparar(const Fecha &fecha1, const Fecha &fecha2){
-  if(fecha1.a < fecha2.a){
+  if(fecha1.ano < fecha2.ano){
     return true;
   }
-  if(fecha1.a == fecha2.a && fecha1.m < fecha2.m){
+  if(fecha1.ano == fecha2.ano && fecha1.mes < fecha2.mes){
     return true;
   }
-  if(fecha1.a == fecha2.a && fecha1.m == fecha2.m && fecha1.d < fecha2.d){
+  if(fecha1.ano == fecha2.ano && fecha1.mes == fecha2.mes && fecha1.dia < fecha2.dia){
     return true;
   }
   return false;
