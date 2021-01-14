@@ -39,6 +39,6 @@ bool comparar(const Fecha &fecha1, const Fecha &fecha2){
  * sort that interval, and "n" is the total number of elements the
  * array has.
  */
-void ordenarFechas(Fecha arr[], int n){
-  std::sort(arr, arr+n, comparar);
+void ordenarFechas(Fecha array_fechas[], int numero_elementos_array){
+  std::sort(array_fechas, array_fechas+numero_elementos_array, comparar);
 }
