@@ -61,7 +61,7 @@ int main(int argc, char* argv[]){
       int n = sizeof(arr)/sizeof(arr[0]);
       ordenarFechas(arr, n);
       for(int j=0; j<n; j++){
-        out << arr[j].d << " " << arr[j].m << " " << arr[j].a << " " << "\n";
+        out << arr[j].dia << " " << arr[j].mes << " " << arr[j].ano << " " << "\n";
       }
       return 0;
     }
