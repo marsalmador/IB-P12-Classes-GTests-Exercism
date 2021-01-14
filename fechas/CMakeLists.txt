@@ -37,8 +37,18 @@ set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
 set(CMAKE_CXX_FLAGS_DEBUG "-g -O0")
 set(CMAKE_CXX_FLAGS_RELEASE "-O3")
 
+# tell cmake where to look for *.h files
+include_directories(${PROJECT_SOURCE_DIR}/src)
+
 # Adds an executable target called "fechas" to be built from the source files listed in the command invocation.
+add_executable(runTests
+    test/test_fechas.cc
+    src/fecha.h
+    src/fecha.cc
+    test/test_fecha.cc
+    
 add_executable(fechas
     src/fecha.h
     src/fecha.cc
-                src/fechas.cc)
+    src/fechas.cc)
+
