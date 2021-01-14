@@ -56,13 +56,13 @@ TEST(TestOrdenarFechas, SóloDíasDistintos){
   Fecha arr[3] = {{22,11,2011}, {21,11,2011}, {20,11,2011}};
   
   ordenarFechas(arr, 3);
-  ASSERT_EQ(20, arr[0].d)
-  ASSERT_EQ(11, arr[0].m)
-  ASSERT_EQ(2011, arr[0].a)
-  ASSERT_EQ(21, arr[1].d)
-  ASSERT_EQ(11, arr[1].m)
-  ASSERT_EQ(2011, arr[1].a)
-  ASSERT_EQ(22, arr[2].d)
-  ASSERT_EQ(12, arr[2].m)
-  ASSERT_EQ(2011, arr[2].a)
+  ASSERT_EQ(20, arr[0].dia)
+  ASSERT_EQ(11, arr[0].mes)
+  ASSERT_EQ(2011, arr[0].ano)
+  ASSERT_EQ(21, arr[1].dia)
+  ASSERT_EQ(11, arr[1].mes)
+  ASSERT_EQ(2011, arr[1].ano)
+  ASSERT_EQ(22, arr[2].dia)
+  ASSERT_EQ(12, arr[2].mes)
+  ASSERT_EQ(2011, arr[2].ano)
 }
